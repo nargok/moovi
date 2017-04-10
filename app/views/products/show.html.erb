@@ -14,7 +14,10 @@
                 <img src="<%= @product.image_url %>" alt="<%= @product.title %>">
               </p>
               <div style="text-align: right">
-                <a href="">この作品を投稿する</a>
+                <!-- <a href="">この作品を投稿する</a> -->
+                <%= link_to 'この作品を投稿する', "/products/#{@product.id}/reviews/new", method: :get %>
+                <!-- こういう書き方もあり -->
+                <!-- <a href="/products/<%= @product.id %>/reviews/new">この作品を投稿する</a> -->
               </div>
               <header class="header header--section">
                 <h2 class="text-middle">
@@ -22,19 +25,27 @@
                 </h2>
               </header>
               <ul style="padding: 0">
+              <!-- ここに繰り返し処理を入れる -->
+              <% @product.reviews.each do |review| %>
                 <li style="border-bottom: dotted 1px">
                   <div class="thumbnail__caption">
-                    <h3 class="text-xsmall text-overflow" title="テスト太郎">
-                      </span>テスト太郎<small 2014=""></small>
+                    <h3 class="text-xsmall text-overflow" title="<%= review.user.nickname %>">
+                      <!-- ニックネームの表示 -->
+                      </span><%= review.user.nickname %><small 2014=""></small>
+                      <!-- </span>テスト太郎<small 2014=""></small> -->
                     </h3>
                     <p class="text-small">
-                      <span class="rating-star"><i class="star-actived rate-[ここに評価を表示]0"></i></span>
+                      <span class="rating-star"><i class="star-actived rate-<%= review.rate %>"></i></span>
                     </p>
                     <p>
-                      面白い！
+                      <!-- コメント文の表示 -->
+                      <%= review.review %>
+                      <!-- 面白い！ -->
                     </p>
                   </div>
                 </li>
+              <% end %>
+              <!-- レビュー繰り返し処理　ここまで -->
               </ul>
             </div>
           </article>

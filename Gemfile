@@ -46,3 +46,12 @@ end
 
 # pry
 gem 'pry-rails'
+
+# mechanize Gem install
+gem 'mechanize'
+
+# device Gem install
+gem 'devise'
+
+# paperclip Gem install
+gem 'paperclip'
